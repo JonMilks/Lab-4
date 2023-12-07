@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="amTextView">Entrez votre nom</string>
+    <string name="amNext">Suivante</string>
+    <string name="naWelcome">Bienvenue,&#160;</string>
+    <string name="naDont">Ne m\'appelle pas comme ça</string>
+    <string name="naThank">Merci</string>
+
+    <string name="urgent">Urgente</string>
+    <string name="typehere">Écrivez ici</string>
+    <string name="add">Ajouter</string>
+</resources>

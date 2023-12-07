@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="amTextView">Enter your name</string>
+    <string name="amNext">Next</string>
+    <string name="naWelcome">Welcome,&#160;</string>
+    <string name="naDont">Don\'t call me that</string>
+    <string name="naThank">Thank You</string>
+
+
+    <string name="urgent">Urgent</string>
+    <string name="typehere">Type Here</string>
+    <string name="add">Add</string>
+    <string name="title_activity_main" />
+    <string name="app_name" />
+
+</resources>
