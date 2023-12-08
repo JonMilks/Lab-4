@@ -3,7 +3,6 @@ package com.example.lab4;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -15,7 +14,6 @@ import android.widget.TextView;
 
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,53 +27,6 @@ public class MainActivity extends AppCompatActivity {
     public EditText inputText;
     public TextView listText;
 
-    /*public class MyListAdapter extends BaseAdapter{
-        public ArrayList<String> toDoList = new ArrayList<>();
-
-
-        @Override
-        public int getCount() {
-            return toDoList.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-       public View getView(int position, View old, ViewGroup parent){
-            View newView = old;
-            TextView listText = findViewById(R.id.ListText);
-            Switch urgent = findViewById(R.id.Urgent);
-            LayoutInflater inflater = getLayoutInflater();
-
-            if(urgent.isChecked()){
-                newView.setBackgroundColor(Color.RED);
-            }
-            LayoutInflater inflater = getLayoutInflater();
-
-            if(newView == null){
-                newView = inflater.inflate(R.layout.row_layout, parent, false);
-            }
-
-            TextView listText = newView.findViewById(R.id.ListText);
-            listText.setText( getItem(position).toString());
-           return newView;
-        }
-    }*/
-
-    public class ListItem{
-
-        String label;
-        boolean isUrgent;
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main_activity);
 
         toDoList = new ArrayList<>();
-        arrayAdapter = new ArrayAdapter<>(this, R.layout.row_layout,toDoList);
+        arrayAdapter = new MyListAdapter(this, R.layout.row_layout,toDoList);
 
        // myAdapter = new MyListAdapter();
         listView = findViewById(R.id.list);
@@ -91,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
         inputText = findViewById(R.id.inputText);
         urgent = findViewById(R.id.urgent);
         listText = findViewById(R.layout.row_layout);
+        String doyou = getString(R.string.doyou);
+        String yes = getString(R.string.Yes);
+        String no = getString(R.string.No);
+        String remove = getString(R.string.remove);
 
 
         listView.setAdapter(arrayAdapter);
@@ -105,16 +60,16 @@ public class MainActivity extends AppCompatActivity {
 
         listView.setOnItemLongClickListener ( (parent, view, position, id) -> {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
-            alert.setTitle("Delete:");
+            alert.setTitle(remove);
 
-            alert.setMessage("Do you want to delete this?");
+            alert.setMessage(doyou);
 
-            alert.setPositiveButton("Yes", (click, arg)->{
+            alert.setPositiveButton(yes, (click, arg)->{
                 toDoList.remove(position);
                 arrayAdapter.notifyDataSetChanged();
             });
 
-            alert.setNegativeButton("No", (click, arg) -> {});
+            alert.setNegativeButton(no, (click, arg) -> {});
 
             alert.setView(getLayoutInflater().inflate(R.layout.row_layout, null));
 
@@ -128,18 +83,13 @@ public class MainActivity extends AppCompatActivity {
         listItem.label = null;
         listItem.isUrgent = false;
 
-        listItem.label = (inputText.getText().toString());
-
-        toDoList.add();
+        listItem.label = inputText.getText().toString();
+        toDoList.add(listItem);
         if(urgent.isChecked()){
             listItem.isUrgent = true;
-            listText.setBackgroundColor(Color.RED);
         }
         else{}
         arrayAdapter.notifyDataSetChanged();
         inputText.setText("");
     }
-
 }
-// Add listItem to Array
-// extend ArrayAdapter to add background

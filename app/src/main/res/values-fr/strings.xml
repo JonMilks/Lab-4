@@ -9,4 +9,8 @@
     <string name="urgent">Urgente</string>
     <string name="typehere">Écrivez ici</string>
     <string name="add">Ajouter</string>
+    <string name="doyou">"Voulez-vous supprimer ceci ?"</string>
+    <string name="Yes">Oui</string>
+    <string name="No">Non</string>
+    <string name="remove">Retirer l\'objet</string>
 </resources>
