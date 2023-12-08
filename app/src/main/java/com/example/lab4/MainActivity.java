@@ -3,6 +3,7 @@ package com.example.lab4;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -14,13 +15,14 @@ import android.widget.TextView;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     // public MyListAdapter myAdapter;
-    ArrayAdapter<String> arrayAdapter;
+    ArrayAdapter<ListItem> arrayAdapter;
 
-    public ArrayList<String> toDoList;
+    public ArrayList<ListItem> toDoList;
     public ListView listView;
     public Button button;
     public Switch urgent;
@@ -47,8 +49,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public View getView(int position, View old, ViewGroup parent) {
+       public View getView(int position, View old, ViewGroup parent){
             View newView = old;
+            TextView listText = findViewById(R.id.ListText);
+            Switch urgent = findViewById(R.id.Urgent);
+            LayoutInflater inflater = getLayoutInflater();
+
+            if(urgent.isChecked()){
+                newView.setBackgroundColor(Color.RED);
+            }
             LayoutInflater inflater = getLayoutInflater();
 
             if(newView == null){
@@ -60,6 +69,13 @@ public class MainActivity extends AppCompatActivity {
            return newView;
         }
     }*/
+
+    public class ListItem{
+
+        String label;
+        boolean isUrgent;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
         button = findViewById(R.id.add);
         inputText = findViewById(R.id.inputText);
         urgent = findViewById(R.id.urgent);
+        listText = findViewById(R.layout.row_layout);
 
 
         listView.setAdapter(arrayAdapter);
@@ -107,9 +124,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addItem(View view){
-        toDoList.add(inputText.getText().toString());
+        ListItem listItem = new ListItem();
+        listItem.label = null;
+        listItem.isUrgent = false;
+
+        listItem.label = (inputText.getText().toString());
+
+        toDoList.add();
+        if(urgent.isChecked()){
+            listItem.isUrgent = true;
+            listText.setBackgroundColor(Color.RED);
+        }
+        else{}
         arrayAdapter.notifyDataSetChanged();
         inputText.setText("");
     }
 
 }
+// Add listItem to Array
+// extend ArrayAdapter to add background
