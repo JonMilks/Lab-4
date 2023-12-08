@@ -1,21 +1,13 @@
 package com.example.lab4;
 
-import static android.graphics.Color.RED;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import android.content.Context;
-import android.graphics.Color;
+
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -32,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     public ListView listView;
     public Button button;
     public Switch urgent;
-    public EditText editText;
+    public EditText inputText;
     public TextView listText;
 
     /*public class MyListAdapter extends BaseAdapter{
@@ -80,12 +72,12 @@ public class MainActivity extends AppCompatActivity {
        // myAdapter = new MyListAdapter();
         listView = findViewById(R.id.list);
         button = findViewById(R.id.add);
-        EditText input = findViewById(R.id.inputText);
+        inputText = findViewById(R.id.inputText);
         urgent = findViewById(R.id.urgent);
 
 
         listView.setAdapter(arrayAdapter);
-        String listText = input.getText().toString();
+        String listText = inputText.getText().toString();
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,14 +86,30 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        listView.setOnItemLongClickListener ( (parent, view, position, id) -> {
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setTitle("Delete:");
 
+            alert.setMessage("Do you want to delete this?");
 
+            alert.setPositiveButton("Yes", (click, arg)->{
+                toDoList.remove(position);
+                arrayAdapter.notifyDataSetChanged();
+            });
+
+            alert.setNegativeButton("No", (click, arg) -> {});
+
+            alert.setView(getLayoutInflater().inflate(R.layout.row_layout, null));
+
+            alert.create().show();
+            return true;
+        });
     }
 
     public void addItem(View view){
-        toDoList.add(editText.getText().toString());
+        toDoList.add(inputText.getText().toString());
         arrayAdapter.notifyDataSetChanged();
-        editText.setText("");
+        inputText.setText("");
     }
 
 }
