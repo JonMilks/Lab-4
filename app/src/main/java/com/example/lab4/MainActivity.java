@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    // public MyListAdapter myAdapter;
+
     ArrayAdapter<ListItem> arrayAdapter;
 
     public ArrayList<ListItem> toDoList;
@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         toDoList = new ArrayList<>();
         arrayAdapter = new MyListAdapter(this, R.layout.row_layout,toDoList);
 
-       // myAdapter = new MyListAdapter();
         listView = findViewById(R.id.list);
         button = findViewById(R.id.add);
         inputText = findViewById(R.id.inputText);
